@@ -1,12 +1,17 @@
 #!/usr/bin/env node
 
 import { getArgs } from "./helpers/args.js";
+import { getWeather } from "./services/api.service.js";
 import { printHelp, printSuccess, printError } from "./services/log.service.js";
-import { saveKeyValue } from "./services/storage.service.js";
+import { saveKeyValue, TOKEN_DICTIONARY } from "./services/storage.service.js";
 
 const saveToken = async (token) => {
+  if (!token.length) {
+    printError('Не передан токен');
+    return;
+  }
   try {
-    await saveKeyValue('token', token);
+    await saveKeyValue(TOKEN_DICTIONARY.token, token);
     printSuccess('Токен сохранён');
   } catch (err) {
     printError(err.message);
@@ -22,13 +27,14 @@ const initCLI = () => {
   }
   if (args.s) {
     // сохранить город
-    saveKeyValue('city', args.s);
+    saveKeyValue(TOKEN_DICTIONARY.city, args.s);
   }
   if (args.t) {
     // сохранить токен
     return saveToken(args.t);
   }
-  // вывести погоду
+  // вывести погоду по умолчанию:
+  getWeather('ufa');
 };
 
 initCLI();
