@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getKeyValue, TOKEN_DICTIONARY } from './storage.service.js';
 
-// Получает иконку:
+// Отдаёт эмодзи по коду иконки:
 const getIcon = (code) => {
   switch (code.slice(0, -1)) {
     case '01':

@@ -5,7 +5,7 @@ import { getWeather, getIcon } from "./services/api.service.js";
 import { printHelp, printSuccess, printError, printWeather } from "./services/log.service.js";
 import { saveKeyValue, getKeyValue, TOKEN_DICTIONARY } from "./services/storage.service.js";
 
-const defaultCity = 'ufa'; // город по умолчанию
+const defaultCity = 'moscow'; // город по умолчанию
 
 // Сохранение города:
 const saveCity = async (city) => {
@@ -35,7 +35,7 @@ const saveToken = async (token) => {
   }
 };
 
-// Получить погоду:
+// Получение погоды:
 const getForecast = async () => {
   try {
     let city = await getKeyValue(TOKEN_DICTIONARY.city);

@@ -19,7 +19,7 @@ const isExist = async (path) => {
   }
 };
 
-// Сохраняет в файле ключ: значение:
+// Сохраняет в файле пару ключ: значение:
 const saveKeyValue = async (key, value) => {
   let data = {};
   if (await isExist(filePath)) {
@@ -31,7 +31,7 @@ const saveKeyValue = async (key, value) => {
   await promises.writeFile(filePath, JSON.stringify(data));
 };
 
-// Прочитать значение по ключу:
+// Читает из файла значение по ключу:
 const getKeyValue = async (key) => {
   if (await isExist(filePath)) {
     const file = await promises.readFile(filePath);
