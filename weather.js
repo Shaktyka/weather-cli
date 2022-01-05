@@ -18,6 +18,24 @@ const saveToken = async (token) => {
   }
 };
 
+// Получить погоду:
+const getForecast = async () => {
+  const defaultCity = 'ufa'; // город по умолчанию
+  try {
+    const weather = await getWeather(defaultCity);
+    // красиво вывести погоду
+    console.log(weather);
+  } catch (err) {
+    if (err?.response?.status === 404) {
+      printError('Неверно указан город');
+    } else if (err?.response?.status === 401) {
+      printError('Неверно указан токен');
+    } else {
+      printError(err.message);
+    }
+  }
+};
+
 const initCLI = () => {
   const args = getArgs(process.argv);
 
@@ -33,8 +51,7 @@ const initCLI = () => {
     // сохранить токен
     return saveToken(args.t);
   }
-  // вывести погоду по умолчанию:
-  getWeather('ufa');
+  getForecast();
 };
 
 initCLI();
